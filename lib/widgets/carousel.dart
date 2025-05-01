@@ -2,25 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class Carousel extends StatelessWidget {
-  final List<String> imageUrls = [
-    'https://via.placeholder.com/400x200.png?text=Slide+1',
-    'https://via.placeholder.com/400x200.png?text=Slide+2',
-    'https://via.placeholder.com/400x200.png?text=Slide+3',
-  ];
+  final List<String> imagePaths;
+
+  const Carousel({Key? key, required this.imagePaths}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: CarouselSlider(
         options: CarouselOptions(
-          height: 160.0,
+          height: 250.0,
           autoPlay: true,
           enlargeCenterPage: true,
           viewportFraction: 0.8,
           aspectRatio: 16 / 9,
           initialPage: 0,
         ),
-        items: imageUrls.map((url) {
+        items: imagePaths.map((url) {
           return Builder(
             builder: (BuildContext context) {
               return Card(

@@ -10,6 +10,9 @@ void main() {
   runApp(const MaterialApp(
     home: MainScreen(),
     debugShowCheckedModeBanner: false, // debug 배너 제거
+    routes: {
+      // '/home': (context) => const HomeScreen(),
+    },
   ));
 }
 
