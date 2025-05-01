@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class OptionsScreen extends StatelessWidget {
+class OptionsScreen extends StatelessWidget { // 더보기 페이지
   const OptionsScreen({Key? key}) : super(key: key);
 
   @override

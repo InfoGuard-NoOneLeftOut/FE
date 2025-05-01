@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PolicyScreen extends StatelessWidget {
+class PolicyScreen extends StatelessWidget { // 맞춤 정책 페이지
   const PolicyScreen({Key? key}) : super(key: key);
 
   @override

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatelessWidget { //하단 네비게이션
   final int selectedIndex;
   final ValueChanged<int> onTap;
 
