@@ -1,0 +1,8 @@
+# 줄바꿈 방식 명시
+# git config --global core.autocrlf true   # Windows 사용자 (터미널에 해당 명령어 입력)
+* text=auto
+*.dart text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+*.bat text eol=crlf
+

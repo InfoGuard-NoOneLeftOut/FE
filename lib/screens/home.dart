@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infogaurd_fe/widgets/carousel.dart';
-import 'package:infogaurd_fe/widgets/custom_card.dart';
-import 'package:infogaurd_fe/widgets/button/user_based_button.dart';
+import 'package:infogaurd_fe/widgets/cards/custom_card.dart';
+import 'package:infogaurd_fe/widgets/buttons/user_based_button.dart';
 import 'package:infogaurd_fe/models/user_category.dart';
 
 class HomeScreen extends StatelessWidget { // 메인 페이지
