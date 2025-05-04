@@ -19,11 +19,12 @@ class CustomCard extends StatelessWidget {
     final double cardWidth = width ?? MediaQuery.of(context).size.width * 0.8;
 
     return Card(
-      margin: margin ?? const EdgeInsets.all(8.0),
+      margin: margin ?? const EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(16.0),
       ),
-      elevation: 4.0,
+      color: Colors.white,
+      elevation: 2,
       child: SizedBox(
         height: height,
         width: cardWidth,
