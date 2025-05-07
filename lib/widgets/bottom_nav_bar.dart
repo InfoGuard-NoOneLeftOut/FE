@@ -26,7 +26,7 @@ class BottomNavBar extends StatelessWidget { //하단 네비게이션
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
           BottomNavigationBarItem(icon: Icon(Icons.policy), label: '맞춤정책'),
-          BottomNavigationBarItem(icon: Icon(Icons.chat_bubble_outline), label: '상담'),
+          BottomNavigationBarItem(icon: Icon(Icons.question_answer_outlined), label: '상담'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: '사용자'),
           BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: '더보기'),
         ],

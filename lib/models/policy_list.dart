@@ -18,7 +18,7 @@ class PolicyList {
   final String details;                    // 상세 내용
   final List<PolicyType> categories;       // 정책 분야 (복수 선택 가능)
   final List<String> targetDisabilityTypes; // 해당 장애 유형 (예: ['지체', '청각'])
-  final String targetRegion;               // 지역 (예: '전국', '서울특별시')
+  final String targetRegion;               // 지역
   final String eligibility;                // 대상 조건 (예: '중증 장애인', '기초생활수급자')
   final String provider;                   // 제공 기관 (예: 보건복지부, 서울시청)
   final String applyMethod;                // 신청 방법 (예: 온라인, 방문 신청)

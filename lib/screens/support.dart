@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:infogaurd_fe/widgets/user_profile_form.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({Key? key}) : super(key: key);
@@ -13,7 +12,6 @@ class SupportScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              UserProfileForm(),
             ],
           ),
         ),

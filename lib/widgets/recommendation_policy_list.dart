@@ -42,7 +42,7 @@ class _RecommendationPolicySectionState extends State<RecommendationPolicySectio
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                '추천 복지 정책',
+                '사용자 맞춤형 추천 정책',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               TextButton(

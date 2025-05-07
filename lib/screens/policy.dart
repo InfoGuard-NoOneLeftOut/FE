@@ -1,22 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:infogaurd_fe/widgets/cards/user_profile_card.dart';
-import 'package:infogaurd_fe/models/user_profile.dart';
+
 import 'package:infogaurd_fe/widgets/recommendation_policy_list.dart';
+import 'package:infogaurd_fe/widgets/cards/personalization_consent_card.dart';
 
 class PolicyScreen extends StatelessWidget { // 맞춤 정책 페이지
   const PolicyScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // 예시 유저 데이터 생성 ＝＞ 변경 예정
-    final user = UserProfile(
-      name: '홍길동',
-      age: 28,
-      gender: Gender.male,
-      region: '서울특별시 강남구',
-      disabilityLevel: DisabilityLevel.severe,
-      disabilityTypes: [DisabilityType.physical, DisabilityType.visual],
-    );
+
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -24,10 +16,8 @@ class PolicyScreen extends StatelessWidget { // 맞춤 정책 페이지
         padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
           child: Column(
             children: [
-              UserProfileCard( // 사용자 프로필 표시
-                  userProfile: user
-              ),
-              RecommendationPolicySection(  policies: [
+              PersonalizationConsentCard(),
+              RecommendationPolicySection(  policies: [ // 사용자 맞춤형 추천 정책
                 WelfarePolicy(id: '1', title: '장애인 고용 지원', description: '고용 창출을 위한 다양한 혜택 제공', provider: '고용노동부'),
                 WelfarePolicy(id: '2', title: '장애인 교육 바우처', description: '교육비 일부 지원', provider: '교육부'),
                 WelfarePolicy(id: '3', title: '이동 지원 서비스', description: '특별교통수단 제공', provider: '국토부'),

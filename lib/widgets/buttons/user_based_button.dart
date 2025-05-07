@@ -11,7 +11,7 @@ class UserBasedCategoriesButton extends StatelessWidget { // 장애 등급별 �
     return Center(
       child: GridView.count(
         shrinkWrap: true,
-        crossAxisCount: 2, // 2열 기준, 자동 줄바꿈
+        crossAxisCount: 4, // 4열 기준, 자동 줄바꿈
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
         childAspectRatio: 1, // 정사각형
