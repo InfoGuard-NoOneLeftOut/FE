@@ -12,6 +12,7 @@ class SupportScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text('상담 페이지')
             ],
           ),
         ),
