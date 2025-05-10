@@ -9,7 +9,7 @@ import 'screens/options.dart';
 void main() {
   runApp(const MaterialApp(
     home: MainScreen(),
-    debugShowCheckedModeBanner: false, // debug 배너 제거
+    debugShowCheckedModeBanner: false,
     routes: {
       // '/home': (context) => const HomeScreen(),
     },
@@ -18,7 +18,6 @@ void main() {
 
 class MainScreen extends StatefulWidget {
   final int initialIndex;
-
   const MainScreen({Key? key, this.initialIndex = 0}) : super(key: key);
 
   @override
@@ -34,7 +33,7 @@ class _MainScreenState extends State<MainScreen> {
     _selectedIndex = widget.initialIndex;
   }
 
-  final List<Widget> _pages = const [
+  static const List<Widget> _pages = [
     HomeScreen(),
     PolicyScreen(),
     SupportScreen(),
@@ -43,9 +42,7 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() => _selectedIndex = index);
   }
 
   @override
