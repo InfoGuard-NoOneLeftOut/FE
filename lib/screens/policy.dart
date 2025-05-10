@@ -4,6 +4,7 @@ import 'package:infogaurd_fe/models/job_opportunity.dart';
 import 'package:infogaurd_fe/widgets/cards/personalization_consent_card.dart';
 import 'package:infogaurd_fe/widgets/lists/recommendation_policy_list.dart';
 import 'package:infogaurd_fe/widgets/lists/recommendation_job_list.dart';
+import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
 
 class PolicyScreen extends StatefulWidget {
   const PolicyScreen({Key? key}) : super(key: key);
@@ -28,27 +29,6 @@ class _PolicyScreenState extends State<PolicyScreen> {
     _allJobs = JobOpportunity.sampleJobs();
   }
 
-  Widget _buildAccessibilityTips() {
-    return Card(
-      color: Colors.indigoAccent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text('접근성 팁', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Text('• 음성 안내 기능 켜기', style: TextStyle(color: Colors.white)),
-            Text('• 큰 글씨 모드 사용', style: TextStyle(color: Colors.white)),
-            Text('• 고대비 모드 활성화', style: TextStyle(color: Colors.white)),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final policyCategories = _policyMap.keys.toList();
@@ -67,26 +47,52 @@ class _PolicyScreenState extends State<PolicyScreen> {
       length: 2,
       child: Scaffold(
         backgroundColor: Colors.grey[50],
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: const Text('InfoGuard', style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold, fontSize: 20)),
-          centerTitle: true,
-          bottom: const TabBar(
-            indicatorColor: Colors.indigo,
-            labelColor: Colors.indigo,
-            unselectedLabelColor: Colors.black54,
-            tabs: [Tab(text: '맞춤 정책'), Tab(text: '맞춤 채용')],
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(180),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: Colors.white,
+            centerTitle: true,
+            bottom: const TabBar(
+              indicatorColor: Colors.indigo,
+              labelColor: Colors.indigo,
+              unselectedLabelColor: Colors.black54,
+              tabs: [Tab(text: '맞춤 정책'), Tab(text: '맞춤 채용')],
+            ),
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+              child: Align(
+                alignment: Alignment.center,
+                child: MainLogoHeader(),
+              ),
+            ),
           ),
         ),
+
         body: TabBarView(
           children: [
             // 맞춤 정책: 리스팅 전체, 스크롤 가능한 ListView
             ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                _buildAccessibilityTips(),
+                const SizedBox(height: 32),
+                PersonalizationConsentCard(),
+                const SizedBox(height: 32),
+                const Text('정용진님을 위한 맞춤 정책', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                DropdownButton<String>(
+                  value: _selectedPolicyCategory,
+                  isExpanded: true,
+                  items: policyCategories.map((cat) => DropdownMenuItem(value: cat, child: Text(cat))).toList(),
+                  onChanged: (val) => setState(() => _selectedPolicyCategory = val!),
+                ),
                 const SizedBox(height: 16),
+                SizedBox(
+                  height: 400,
+                  child: RecommendationPolicySection(policies: policyList),
+                ),
+                // 인기 정책
+                const SizedBox(height: 32),
                 const Text('요즘 인기있는 정책들', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 8),
                 SizedBox(
@@ -118,26 +124,15 @@ class _PolicyScreenState extends State<PolicyScreen> {
                     },
                   ),
                 ),
-                const SizedBox(height: 24),
-                const Text('정용진님을 위한 맞춤 정책', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12),
-                DropdownButton<String>(
-                  value: _selectedPolicyCategory,
-                  isExpanded: true,
-                  items: policyCategories.map((cat) => DropdownMenuItem(value: cat, child: Text(cat))).toList(),
-                  onChanged: (val) => setState(() => _selectedPolicyCategory = val!),
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  height: 400,
-                  child: RecommendationPolicySection(policies: policyList),
-                ),
               ],
             ),
             // 맞춤 채용: 전체 채용 리스트 & 추천 기업
             ListView(
               padding: const EdgeInsets.all(16),
               children: [
+                const SizedBox(height: 32),
+                PersonalizationConsentCard(),
+                const SizedBox(height: 16),
                 const Text('맞춤 기업 추천', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
                 SizedBox(
