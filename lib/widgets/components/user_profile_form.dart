@@ -60,6 +60,7 @@ class _UserProfileFormState extends State<UserProfileForm> {
                   }
                 },
                 child: Text(currentStep < 1 ? "다음" : "완료"),
+                // 이전 버튼 및 0페이지에서 취소 버튼 필요 (취소 버튼 클릭 시 메인 페이지로 돌아갈 수 있도록)
               ),
             ],
           ),

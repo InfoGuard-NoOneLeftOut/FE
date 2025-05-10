@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infogaurd_fe/models/user_profile.dart';
 import 'package:infogaurd_fe/widgets/cards/user_profile_card.dart';
+import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
 
 class UserScreen extends StatelessWidget { // 사용자 페이지
   const UserScreen({Key? key}) : super(key: key);
@@ -20,16 +21,17 @@ class UserScreen extends StatelessWidget { // 사용자 페이지
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
           child: Column(
             children: [
+              MainLogoHeader(),
               UserProfileCard( // 사용자 프로필 표시
                 userProfile: user,
               ),
             ],
-          ), // Column 닫음
-        ), // Padding 닫음
-      ), // SingleChildScrollView 닫음
+          ),
+        ),
+      ),
     );
   }
 }

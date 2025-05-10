@@ -29,7 +29,7 @@ class CustomCard extends StatelessWidget {
         height: height,
         width: cardWidth,
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.zero,
           child: child,
         ),
       ),

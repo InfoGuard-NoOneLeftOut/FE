@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/bottom_nav_bar.dart';
+import 'widgets/components/bottom_nav_bar.dart';
 import 'screens/home.dart';
 import 'screens/policy.dart';
 import 'screens/support.dart';
@@ -28,12 +28,6 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late int _selectedIndex;
 
-  @override
-  void initState() {
-    super.initState();
-    _selectedIndex = widget.initialIndex;
-  }
-
   final List<Widget> _pages = const [
     HomeScreen(),
     PolicyScreen(),
@@ -41,6 +35,12 @@ class _MainScreenState extends State<MainScreen> {
     UserScreen(),
     OptionsScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
 
   void _onItemTapped(int index) {
     setState(() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
 
 class SupportScreen extends StatelessWidget {
   const SupportScreen({Key? key}) : super(key: key);
@@ -8,10 +9,11 @@ class SupportScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              MainLogoHeader(),
               Text('상담 페이지')
             ],
           ),

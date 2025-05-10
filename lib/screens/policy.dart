@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:infogaurd_fe/widgets/lists/recommendation_policy_list.dart';
 import 'package:infogaurd_fe/widgets/cards/personalization_consent_card.dart';
+import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
 
 class PolicyScreen extends StatelessWidget { // 맞춤 정책 페이지
   const PolicyScreen({Key? key}) : super(key: key);
@@ -13,9 +14,10 @@ class PolicyScreen extends StatelessWidget { // 맞춤 정책 페이지
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
           child: Column(
             children: [
+              MainLogoHeader(),
               PersonalizationConsentCard(), // 사용자 정보 수집 동의 카드
               RecommendationPolicySection(  policies: [ // 사용자 맞춤형 추천 정책
                 WelfarePolicy(id: '1', title: '장애인 고용 지원', description: '고용 창출을 위한 다양한 혜택 제공', provider: '고용노동부'),

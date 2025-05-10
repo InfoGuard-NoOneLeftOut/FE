@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:infogaurd_fe/widgets/carousel.dart';
+import 'package:infogaurd_fe/widgets/components/carousel.dart';
 import 'package:infogaurd_fe/widgets/cards/custom_card.dart';
 import 'package:infogaurd_fe/widgets/buttons/user_based_button.dart';
 import 'package:infogaurd_fe/models/user_category.dart';
 import 'package:infogaurd_fe/widgets/cards/easy_words_card.dart';
+import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
 
 // flutter pub global activate devtools
 // flutter pub global run devtools
@@ -16,11 +17,12 @@ class HomeScreen extends StatelessWidget { // 메인 페이지
     return Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 50, 20, 20),
+          padding: const EdgeInsets.fromLTRB(20, 30, 20, 20), //좌, 상, 우, 하
             child: Column(
               children: [
+                MainLogoHeader(),
                 CustomCard(
-                  height: 100,
+                  height: 80,
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [

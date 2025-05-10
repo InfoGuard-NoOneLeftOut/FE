@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:infogaurd_fe/widgets/user_profile_form.dart';
+import 'package:infogaurd_fe/widgets/components/user_profile_form.dart';
 
 class PersonalizationConsentCard extends StatelessWidget {
   final double? width;
