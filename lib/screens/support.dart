@@ -28,7 +28,7 @@ class _SupportScreenState extends State<SupportScreen> {
   @override
   void initState() {
     super.initState();
-    const apiKey = 'Enter your API key'; // API KEY
+    const apiKey = 'api_key 넣어야함'; // API KEY
     _chatService = ChatService(apiKey: apiKey);
     _messages.add(ChatMessage(text: '안녕하세요! 무엇을 도와드릴까요?', isUser: false));
   }
