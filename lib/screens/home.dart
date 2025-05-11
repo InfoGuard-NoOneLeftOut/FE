@@ -39,12 +39,12 @@ class HomeScreen extends StatelessWidget { // 메인 페이지
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: const [
                             Text(
-                              '👩‍🦽 장애인복지일자리사업',
+                              '2025년 장애인복지일자리사업',
                               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                             ),
                             SizedBox(height: 4),
                             Text(
-                              '마감 임박! 지금 신청하세요.',
+                              '참여자 모집기간이 얼마 남지 않았어요!',
                               style: TextStyle(fontSize: 13),
                             ),
                           ],

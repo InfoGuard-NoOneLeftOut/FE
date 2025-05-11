@@ -5,6 +5,7 @@ class CustomCard extends StatelessWidget {
   final double? width;
   final Widget child;
   final EdgeInsetsGeometry? margin;
+  final EdgeInsetsGeometry? padding;
 
   const CustomCard({
     Key? key,
@@ -12,6 +13,7 @@ class CustomCard extends StatelessWidget {
     required this.child,
     this.width,
     this.margin,
+    this.padding,
   }) : super(key: key);
 
   @override
@@ -29,7 +31,7 @@ class CustomCard extends StatelessWidget {
         height: height,
         width: cardWidth,
         child: Padding(
-          padding: EdgeInsets.zero,
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 16.0),
           child: child,
         ),
       ),
