@@ -6,13 +6,13 @@ class WelfarePolicy {
   final String id;
   final String title;
   final String description;
-  final String provider;
+  final String category;
 
   WelfarePolicy({
     required this.id,
     required this.title,
     required this.description,
-    required this.provider,
+    required this.category,
   });
 }
 
@@ -30,8 +30,7 @@ class _EasyWordsCardState extends State<EasyWordsCard> {
 
   @override
   Widget build(BuildContext context) {
-    final displayedPolicies = _showAll ? widget.policies : widget.policies.take(
-        5).toList();
+    final displayedPolicies = _showAll ? widget.policies : widget.policies.take(5).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,31 +51,39 @@ class _EasyWordsCardState extends State<EasyWordsCard> {
                     _showAll = !_showAll;
                   });
                 },
-                child: Text(_showAll ? '간략히 보기' : '더보기'),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(_showAll ? '간략히 보기' : '더보기'),
+                    const SizedBox(width: 4),
+                    const Icon(Icons.chevron_right),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-
         const SizedBox(height: 12),
 
-        // 리스트 뷰
         _showAll
-            ? Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: GridView.builder(
-            itemCount: displayedPolicies.length,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              childAspectRatio: 3 / 4,
+            ? SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: GridView.builder(
+              itemCount: displayedPolicies.length,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                childAspectRatio: 3 / 4,
+              ),
+              itemBuilder: (context, index) {
+                return _buildPolicyCard(displayedPolicies[index]);
+              },
             ),
-            itemBuilder: (context, index) {
-              return _buildPolicyCard(displayedPolicies[index]);
-            },
           ),
         )
             : SizedBox(
@@ -94,43 +101,67 @@ class _EasyWordsCardState extends State<EasyWordsCard> {
             },
           ),
         ),
-
         const SizedBox(height: 16),
-
       ],
     );
   }
 
   // 카드 위젯
   Widget _buildPolicyCard(WelfarePolicy policy) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              policy.title,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: Colors.primaries[policy.title.hashCode % Colors.primaries.length].shade50,
+      ),
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 상단 카테고리 태그
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.6),
+              borderRadius: BorderRadius.circular(8),
             ),
-            const SizedBox(height: 8),
-            Text(
-              policy.description,
-              style: const TextStyle(fontSize: 13, color: Colors.black54),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
+            child: Text(
+              policy.category,
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
             ),
-            const Spacer(),
-            Text(
-              policy.provider,
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
+          ),
+          const SizedBox(height: 12),
+
+          // 아이콘 또는 이미지
+          Center(
+            child: Icon(
+              Icons.credit_card,
+              size: 40,
+              color: Colors.deepPurpleAccent,
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+
+          // 제목
+          Text(
+            policy.title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: Colors.black87,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 8),
+
+          // 설명
+          Text(
+            policy.description,
+            style: const TextStyle(fontSize: 13, color: Colors.black54),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+        ],
       ),
     );
   }
