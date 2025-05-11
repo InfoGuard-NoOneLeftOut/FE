@@ -7,9 +7,16 @@ import 'screens/user.dart';
 import 'screens/options.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(MaterialApp(
     home: MainScreen(),
     debugShowCheckedModeBanner: false, // debug 배너 제거
+    theme: ThemeData(
+      fontFamily: 'KoddiUD', // 전체 기본 폰트 적용
+      textTheme: ThemeData.light().textTheme.apply(
+        bodyColor: Colors.black,
+        displayColor: Colors.black,
+      ),
+    ),
     routes: {
       // '/home': (context) => const HomeScreen(),
     },

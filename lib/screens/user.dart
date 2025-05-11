@@ -28,6 +28,7 @@ class UserScreen extends StatelessWidget { // 사용자 페이지
               UserProfileCard( // 사용자 프로필 표시
                 userProfile: user,
               ),
+              // 북마크 정책 표시
             ],
           ),
         ),

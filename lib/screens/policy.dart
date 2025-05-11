@@ -78,7 +78,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                 const SizedBox(height: 32),
                 PersonalizationConsentCard(),
                 const SizedBox(height: 32),
-                const Text('정용진님을 위한 맞춤 정책', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const Text('홍길동님을 위한 맞춤 정책', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
                 DropdownButton<String>(
                   value: _selectedPolicyCategory,
