@@ -1,40 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:infogaurd_fe/models/user_category.dart';
 
-class UserBasedCategoriesButton extends StatelessWidget { // 장애 등급별 카테고리 버튼
+class UserBasedCategoriesButton extends StatelessWidget {
   final List<UserCategory> categories;
 
   const UserBasedCategoriesButton({Key? key, required this.categories}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 4, // 4열 기준, 자동 줄바꿈
-        crossAxisSpacing: 16,
-        mainAxisSpacing: 16,
-        childAspectRatio: 1, // 정사각형
-        padding: const EdgeInsets.all(16),
-        children: categories.map((category) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, category.route);
-            },
-            child: Container(
+    final theme = Theme.of(context);
+
+    return GridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 4,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
+      childAspectRatio: 0.85,
+      children: categories.map((category) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, category.route);
+          },
+          child: Material(
+            color: Colors.white,
+            elevation: 0.5,
+            shadowColor: Colors.black.withOpacity(0.05),
+            borderRadius: BorderRadius.circular(20),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.shade300,
+                    color: Colors.black12.withOpacity(0.05),
                     blurRadius: 6,
                     offset: const Offset(0, 3),
-                  )
+                  ),
                 ],
               ),
-              height: 120,
-              width: 120,
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -42,14 +49,18 @@ class UserBasedCategoriesButton extends StatelessWidget { // 장애 등급별 �
                   const SizedBox(height: 12),
                   Text(
                     category.title,
-                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyText2?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ),
             ),
-          );
-        }).toList(),
-      ),
+          ),
+        );
+      }).toList(),
     );
   }
 }
