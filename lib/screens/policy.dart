@@ -87,9 +87,10 @@ class _PolicyScreenState extends State<PolicyScreen> {
                     setState(() => _selectedPolicyCategory = val);
                   },
                 ),
+
                 // 인기 정책
                 const SizedBox(height: 48),
-                const Text('요즘 인기있는 정책들', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                const Text('이번 달 인기 정책', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 8),
                 SizedBox(
                   height: 140,

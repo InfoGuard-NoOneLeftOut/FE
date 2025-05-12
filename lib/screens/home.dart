@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget { // 메인 페이지
 
                 UserBasedCategoriesButton(categories: userCategories),
 
-                EasyWordsCard(
+                EasyWordsCard( // 쉬운 용어 사전
                   policies: [
                     WelfarePolicy(id: '1', title: '장애인 고용 지원', description: '고용 창출을 위한 다양한 혜택 제공', category: '일자리'),
                     WelfarePolicy(id: '2', title: '장애인 교육 바우처', description: '교육비 일부 지원', category: '교육'),

@@ -7,36 +7,106 @@ class ColorBlindFilterSelector extends StatefulWidget {
   State<ColorBlindFilterSelector> createState() => _ColorBlindFilterSelectorState();
 }
 
-class _ColorBlindFilterSelectorState extends State<ColorBlindFilterSelector> { // 색맹 필터
-  String _selectedFilter = '적록(녹색약, 제2색맹)';
+class _ColorBlindFilterSelectorState extends State<ColorBlindFilterSelector> {
+  String _selectedFilter = '적록(적색약, 제1색맹) - 빨간색이 회색빛, 어둡게 보임';
 
   final List<String> _filters = [
-    '적록(녹색약, 제2색맹)',
-    '적록(적색약, 제1색맹)',
-    '청황(제3색맹)',
+    '적록(적색약, 제1색맹) - 빨간색이 회색빛, 어둡게 보임',
+    '적록(녹색약, 제2색맹) - 빨강/녹색 구별이 어려움, 노란빛 도는 왜곡',
+    '청황(제3색맹) - 파랑/노랑 구별이 어려움, 회색/보라빛처럼 보일 수 있음',
   ];
+
+  Widget _buildColorChart(String filter) {
+    // 필터별 예시 컬러 차트 정의
+    List<Color> colors;
+
+    switch (filter) {
+      case '적록(적색약, 제1색맹) - 빨간색이 회색빛, 어둡게 보임':
+        colors = [
+          Colors.red.shade700,      // 빨강 (약하게 보임)
+          Colors.green,             // 녹색
+          Colors.brown,             // 갈색 (혼동 가능)
+          Colors.orange.shade400,   // 주황 (빨강과 혼동)
+          Colors.blue.shade800,     // 파랑 (정상 인식)
+        ];
+        break;
+      case '적록(녹색약, 제2색맹) - 빨강/녹색 구별이 어려움, 노란빛 도는 왜곡':
+        colors = [
+          Colors.red.shade400,      // 빨강 (약간 회색빛)
+          Colors.lime.shade600,     // 라임색 (녹색 왜곡)
+          Colors.orange,            // 주황 (빨강과 혼동)
+          Colors.yellow,            // 노랑 (강조됨)
+          Colors.blue,              // 파랑 (정상 인식)
+        ];
+        break;
+      case '청황(제3색맹) - 파랑/노랑 구별이 어려움, 회색/보라빛처럼 보일 수 있음':
+        colors = [
+          Colors.blue.shade600,     // 파랑 (약하게 보임)
+          Colors.yellow.shade400,   // 노랑 (연하게 보임)
+          Colors.cyan.shade700,     // 시안 (파랑 대체)
+          Colors.grey.shade500,     // 노랑 왜곡 이미지
+          Colors.pink.shade300,     // 보라/분홍 (혼동)
+        ];
+        break;
+      default:
+        colors = [Colors.grey, Colors.grey, Colors.grey];
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '색상 차트 미리 보기',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+              color: Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            children: colors.map((color) {
+              return Expanded(
+                child: Container(
+                  height: 40,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  decoration: BoxDecoration(
+                    color: color,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black12,
-              blurRadius: 8,
-              offset: Offset(0, 4),
-            ),
-          ],
-          border: Border.all(color: Colors.grey.shade200),
-        ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+        border: Border.all(color: Colors.grey.shade200),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            '색맹 필터 모드',
+            '색맹 필터',
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -45,7 +115,7 @@ class _ColorBlindFilterSelectorState extends State<ColorBlindFilterSelector> { /
           ),
           const SizedBox(height: 10),
           const Text(
-            '또는 9가지 색상표의 색을 더 쉽게 구별할 수 있도록 색맹 필터를 적용하세요.',
+            '9가지 색상표의 색을 더 쉽게 구별할 수 있도록 색맹 필터를 적용하세요.',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
@@ -83,12 +153,12 @@ class _ColorBlindFilterSelectorState extends State<ColorBlindFilterSelector> { /
               ),
             );
           }).toList(),
+          _buildColorChart(_selectedFilter),
+          const SizedBox(height: 20),
           Align(
             alignment: Alignment.centerRight,
             child: ElevatedButton(
               onPressed: () {
-                // 여기에 실제 색맹 필터 적용 로직 추가
-                // 예: Provider 등을 통해 필터 상태 갱신
                 print('$_selectedFilter 필터가 적용되었습니다');
               },
               style: ElevatedButton.styleFrom(
@@ -109,41 +179,3 @@ class _ColorBlindFilterSelectorState extends State<ColorBlindFilterSelector> { /
     );
   }
 }
-
-// ColorFiltered(
-// colorFilter: ColorFilter.matrix(_getColorMatrix(context.watch<ColorFilterProvider>().type)),
-// child: MyMainAppView(), // 앱의 나머지 부분
-// )
-
-// List<double> _getColorMatrix(ColorBlindType type) {
-//   switch (type) {
-//     case ColorBlindType.protanopia: // 적색약 (제1색맹)
-//       return [
-//         0.567, 0.433, 0,     0, 0,
-//         0.558, 0.442, 0,     0, 0,
-//         0,     0.242, 0.758, 0, 0,
-//         0,     0,     0,     1, 0,
-//       ];
-//     case ColorBlindType.deuteranopia: // 녹색약 (제2색맹)
-//       return [
-//         0.625, 0.375, 0,     0, 0,
-//         0.7,   0.3,   0,     0, 0,
-//         0,     0.3,   0.7,   0, 0,
-//         0,     0,     0,     1, 0,
-//       ];
-//     case ColorBlindType.tritanopia: // 청색약 (제3색맹)
-//       return [
-//         0.95,  0.05,  0,     0, 0,
-//         0,     0.433, 0.567, 0, 0,
-//         0,     0.475, 0.525, 0, 0,
-//         0,     0,     0,     1, 0,
-//       ];
-//     default:
-//       return List<double>.from([
-//         1, 0, 0, 0, 0,
-//         0, 1, 0, 0, 0,
-//         0, 0, 1, 0, 0,
-//         0, 0, 0, 1, 0,
-//       ]);
-//   }
-// }

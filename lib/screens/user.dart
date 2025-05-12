@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:infogaurd_fe/models/user_profile.dart';
 import 'package:infogaurd_fe/widgets/cards/user_profile_card.dart';
 import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
+import 'package:infogaurd_fe/widgets/lists/bookmark_list.dart';
 
 class UserScreen extends StatelessWidget { // 사용자 페이지
   const UserScreen({Key? key}) : super(key: key);
@@ -28,7 +29,8 @@ class UserScreen extends StatelessWidget { // 사용자 페이지
               UserProfileCard( // 사용자 프로필 표시
                 userProfile: user,
               ),
-              // 북마크 정책 표시
+              const SizedBox(height: 16),
+              BookmarkList(), // 북마크
             ],
           ),
         ),

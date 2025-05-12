@@ -53,7 +53,7 @@ class _SupportScreenState extends State<SupportScreen> {
       _history.add({'role': 'assistant', 'content': reply});
     });
 
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _scrollController.animateTo(
         _scrollController.position.maxScrollExtent,
         duration: const Duration(milliseconds: 300),
@@ -66,7 +66,7 @@ class _SupportScreenState extends State<SupportScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 30, 20, 20), // 좌, 상, 우, 하
+        padding: const EdgeInsets.fromLTRB(0, 30, 0, 0), // 좌, 상, 우, 하
         child: Column(
           children: [
             MainLogoHeader(),
@@ -74,7 +74,7 @@ class _SupportScreenState extends State<SupportScreen> {
             Expanded(
               child: ListView.builder(
                 controller: _scrollController,
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 itemCount: _messages.length,
                 itemBuilder: (ctx, i) {
                   final msg = _messages[i];
@@ -88,9 +88,17 @@ class _SupportScreenState extends State<SupportScreen> {
                           vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: msg.isUser
-                            ? Colors.blueAccent
-                            : Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(16),
+                            ? const Color(0xFF007AFF) // iOS 파란색
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          if (!msg.isUser)
+                            const BoxShadow(
+                              color: Colors.black12,
+                              blurRadius: 4,
+                              offset: Offset(0, 2),
+                            ),
+                        ],
                       ),
                       child: Text(
                         msg.text,
@@ -105,42 +113,53 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
             ),
             const Divider(height: 1),
-            Container(
-              padding: const EdgeInsets.all(8),
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _inputController,
-                      decoration: InputDecoration(
-                        hintText: '메세지를 입력하세요...',
-                        hintStyle: TextStyle(fontSize: 16),
-                        filled: true,
-                        fillColor: Colors.grey.shade100,
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(24),
-                          borderSide: BorderSide.none,
-                        ),
-                        contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 16),
-                      ),
-                      onSubmitted: (_) => _handleSend(),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  CircleAvatar(
-                    backgroundColor: Colors.blueAccent,
-                    child: IconButton(
-                      icon: const Icon(Icons.send, color: Colors.white),
-                      onPressed: _handleSend,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            _buildInputArea(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildInputArea() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: const BoxDecoration(
+        color: Color(0xFFF9F9F9),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: Offset(0, -2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            child: Material(
+              elevation: 0.5,
+              borderRadius: BorderRadius.circular(30),
+              child: TextField(
+                controller: _inputController,
+                decoration: InputDecoration(
+                  hintText: '메세지를 입력하세요...',
+                  border: InputBorder.none,
+                  contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                ),
+                onSubmitted: (_) => _handleSend(),
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          GestureDetector(
+            onTap: _handleSend,
+            child: const CircleAvatar(
+              backgroundColor: Color(0xFF007AFF),
+              child: Icon(Icons.send, color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }

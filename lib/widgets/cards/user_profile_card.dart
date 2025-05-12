@@ -12,9 +12,13 @@ class UserProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 1,
-      color: const Color(0xFFF9F9F9),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      elevation: 12,
+      color: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade200),
+      ),
+      shadowColor: Colors.black12,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
