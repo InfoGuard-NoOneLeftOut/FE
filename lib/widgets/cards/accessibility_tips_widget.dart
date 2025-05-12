@@ -5,10 +5,10 @@ class AccessibilityTipsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center( // 화면 중앙에 배치
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.8, // 화면 너비의 80%로 설정
+        width: MediaQuery.of(context).size.width * 0.8,
         child: Card(
           color: Colors.indigoAccent,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           elevation: 4,
           child: Padding(
             padding: const EdgeInsets.all(16),

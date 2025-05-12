@@ -5,6 +5,7 @@ import 'package:infogaurd_fe/widgets/cards/personalization_consent_card.dart';
 import 'package:infogaurd_fe/widgets/lists/recommendation_policy_list.dart';
 import 'package:infogaurd_fe/widgets/lists/recommendation_job_list.dart';
 import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
+import 'package:infogaurd_fe/widgets/lists/personalized_policy_list.dart';
 
 class PolicyScreen extends StatefulWidget {
   const PolicyScreen({Key? key}) : super(key: key);
@@ -54,8 +55,8 @@ class _PolicyScreenState extends State<PolicyScreen> {
             backgroundColor: Colors.white,
             centerTitle: true,
             bottom: const TabBar(
-              indicatorColor: Colors.indigo,
-              labelColor: Colors.indigo,
+              indicatorColor: Colors.blueAccent,
+              labelColor: Colors.blueAccent,
               unselectedLabelColor: Colors.black54,
               tabs: [Tab(text: '맞춤 정책'), Tab(text: '맞춤 채용')],
             ),
@@ -76,23 +77,18 @@ class _PolicyScreenState extends State<PolicyScreen> {
               padding: const EdgeInsets.all(16),
               children: [
                 const SizedBox(height: 32),
-                PersonalizationConsentCard(),
-                const SizedBox(height: 32),
-                const Text('홍길동님을 위한 맞춤 정책', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12),
-                DropdownButton<String>(
-                  value: _selectedPolicyCategory,
-                  isExpanded: true,
-                  items: policyCategories.map((cat) => DropdownMenuItem(value: cat, child: Text(cat))).toList(),
-                  onChanged: (val) => setState(() => _selectedPolicyCategory = val!),
-                ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  height: 400,
-                  child: RecommendationPolicySection(policies: policyList),
+                PersonalizationConsentCard(), // 맞춤 정책 정보 수집 요청 카드
+                const SizedBox(height: 48),
+                PersonalizedPolicyList( // 개인 맞춤 정책 리스트
+                  selectedCategory: _selectedPolicyCategory,
+                  policyCategories: policyCategories,
+                  policies: policyList,
+                  onCategoryChanged: (val) {
+                    setState(() => _selectedPolicyCategory = val);
+                  },
                 ),
                 // 인기 정책
-                const SizedBox(height: 32),
+                const SizedBox(height: 48),
                 const Text('요즘 인기있는 정책들', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                 const SizedBox(height: 8),
                 SizedBox(
@@ -126,6 +122,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                 ),
               ],
             ),
+
             // 맞춤 채용: 전체 채용 리스트 & 추천 기업
             ListView(
               padding: const EdgeInsets.all(16),

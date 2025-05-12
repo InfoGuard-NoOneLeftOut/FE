@@ -14,6 +14,7 @@ enum DisabilityType {
 
 class UserProfile {
   // 기본 프로필 표시 내역 (필수 입력 사항)
+  final String? imagePath;
   final String name;
   final int age;
   final Gender gender;
@@ -30,6 +31,7 @@ class UserProfile {
   final String? guardianInfo; // 보호자 또는 대리인 정보 (선택 입력)
   
   UserProfile({
+    this.imagePath, // nullable
     required this.name,
     required this.age,
     required this.gender,

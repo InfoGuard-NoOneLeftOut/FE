@@ -19,4 +19,6 @@ class ColorProps {
   static const Color mainIconPoint = Color(0xFFED8400);      // 메인 아이콘 포인트
   static const Color orangeIcon = Color(0xFFF28215);         // 오렌지 앱 내 아이콘 색상
   static const Color grayBackground = Color(0xFFF8F8F8);     // 회색 배경
+
+// blueAccent #0xFF2979FF
 }

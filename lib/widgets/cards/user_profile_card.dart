@@ -3,212 +3,89 @@ import 'package:infogaurd_fe/models/user_profile.dart';
 
 class UserProfileCard extends StatelessWidget {
   final UserProfile userProfile;
-  final bool showDetail;
 
   const UserProfileCard({
     Key? key,
     required this.userProfile,
-    this.showDetail = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final boxWidth = screenWidth / 2.3;
-
     return Card(
       elevation: 1,
       color: const Color(0xFFF9F9F9),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        padding: const EdgeInsets.all(16),
+        child: Row(
           children: [
-            /// 기본 정보 카드
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // 이름
-                Center(
-                  child: Text(
+            // 왼쪽 프로필 사진
+            CircleAvatar(
+              radius: 32,
+              backgroundColor: Colors.grey.shade200,
+              child: userProfile.imagePath != null
+                  ? ClipOval(
+                child: Image.asset(
+                  userProfile.imagePath!,
+                  width: 64,
+                  height: 64,
+                  fit: BoxFit.cover,
+                ),
+              )
+                  : Icon(Icons.person, size: 32, color: Colors.grey),
+            ),
+            const SizedBox(width: 16),
+
+            // 오른쪽 정보들
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 이름
+                  Text(
                     userProfile.name,
                     style: const TextStyle(
-                      fontSize: 26,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.black87,
                     ),
                   ),
-                ),
-                const SizedBox(height: 24),
+                  const SizedBox(height: 12),
 
-                // 1행: 2열
-                Row(
-                  children: [
-                    Flexible(
-                      child: _buildInfoTile(
-                        '나이',
-                        '${userProfile.age}세',
-                        icon: Icons.cake,
-                        iconColor: Colors.orange,
-                        width: boxWidth,
+                  // 1번째 줄: 나이, 성별
+                  Row(
+                    children: [
+                      _InfoTag(label: '나이', value: '${userProfile.age}세'),
+                      const SizedBox(width: 8),
+                      _InfoTag(
+                        label: '성별',
+                        value: userProfile.gender == Gender.male ? '남성' : '여성',
                       ),
-                    ),
-                    const SizedBox(width: 8),
-                    Flexible(
-                      child: _buildInfoTile(
-                        '성별',
-                        userProfile.gender == Gender.male ? '남성' : '여성',
-                        icon: Icons.person,
-                        iconColor: Colors.blue,
-                        width: boxWidth,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
 
-                // 2행: 3열
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: _buildInfoTile(
-                        '지역',
-                        userProfile.region,
-                        icon: Icons.location_on,
-                        iconColor: Colors.green,
-                        width: boxWidth,
+                  // 2번째 줄: 지역, 장애 등급, 장애 유형
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      _InfoTag(label: '지역', value: userProfile.region),
+                      _InfoTag(
+                        label: '장애 등급',
+                        value: userProfile.disabilityLevel == DisabilityLevel.severe ? '중증' : '경증',
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildInfoTile(
-                        '장애 등급',
-                        userProfile.disabilityLevel == DisabilityLevel.severe ? '중증' : '경증',
-                        icon: Icons.grade,
-                        iconColor: Colors.purple,
-                        width: boxWidth,
+                      _InfoTag(
+                        label: '장애 유형',
+                        value: userProfile.disabilityTypes.map(_getDisabilityTypeName).join(', '),
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: _buildInfoTile(
-                        '장애 유형',
-                        userProfile.disabilityTypes.map(_getDisabilityTypeName).join(', '),
-                        icon: Icons.accessibility_new,
-                        iconColor: Colors.teal,
-                        width: boxWidth,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
-
-            if (showDetail) ...[
-              const SizedBox(height: 28),
-              Divider(color: Colors.grey.shade300),
-              const SizedBox(height: 16),
-              Wrap(
-                spacing: 16,
-                runSpacing: 16,
-                alignment: WrapAlignment.center,
-                children: [
-                  _buildInfoTile(
-                    '장애 등록 여부',
-                    userProfile.isRegisteredDisabled == true ? '등록됨' : '미등록',
-                    icon: Icons.verified,
-                    iconColor: Colors.indigo,
-                    width: boxWidth,
+                    ],
                   ),
-                  _buildInfoTile(
-                    '복지카드 여부',
-                    userProfile.hasDisabilityCard == true ? '보유' : '미보유',
-                    icon: Icons.credit_card,
-                    iconColor: Colors.redAccent,
-                    width: boxWidth,
-                  ),
-                  _buildInfoTile(
-                    '소득 수준',
-                    userProfile.incomeLevel ?? '공란',
-                    icon: Icons.monetization_on,
-                    iconColor: Colors.green,
-                    width: boxWidth,
-                  ),
-                  _buildInfoTile(
-                    '가구 형태',
-                    userProfile.householdType ?? '공란',
-                    icon: Icons.home,
-                    iconColor: Colors.orange,
-                    width: boxWidth,
-                  ),
-                  _buildInfoTile(
-                    '관심 정책 분야',
-                    userProfile.interestPolicyAreas?.join(', ') ?? '공란',
-                    icon: Icons.policy,
-                    iconColor: Colors.blueGrey,
-                    width: boxWidth,
-                  ),
-                  if (userProfile.guardianInfo != null)
-                    _buildInfoTile(
-                      '보호자 정보',
-                      userProfile.guardianInfo!,
-                      icon: Icons.family_restroom,
-                      iconColor: Colors.deepPurple,
-                      width: boxWidth,
-                    ),
                 ],
               ),
-            ],
+            ),
           ],
         ),
-      ),
-    );
-  }
-
-  /// 정보 타일 위젯
-  Widget _buildInfoTile(String title, String value,
-      {required IconData icon, required Color iconColor, required double width}) {
-    return Container(
-      width: width,
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 4,
-            offset: const Offset(2, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Icon(icon, size: 24, color: iconColor),
-          const SizedBox(height: 6),
-          Text(
-            value,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 13,
-              color: Colors.grey,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -230,5 +107,30 @@ class UserProfileCard extends StatelessWidget {
       case DisabilityType.speech:
         return '언어';
     }
+  }
+}
+
+class _InfoTag extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _InfoTag({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Color(0xFFECECEC),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Text(
+        '$value',
+        style: const TextStyle(
+          fontSize: 13,
+          color: Colors.black87,
+        ),
+      ),
+    );
   }
 }

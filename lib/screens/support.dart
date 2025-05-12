@@ -88,7 +88,7 @@ class _SupportScreenState extends State<SupportScreen> {
                           vertical: 12, horizontal: 16),
                       decoration: BoxDecoration(
                         color: msg.isUser
-                            ? Colors.indigoAccent
+                            ? Colors.blueAccent
                             : Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(16),
                       ),
@@ -130,7 +130,7 @@ class _SupportScreenState extends State<SupportScreen> {
                   ),
                   const SizedBox(width: 8),
                   CircleAvatar(
-                    backgroundColor: Colors.indigo,
+                    backgroundColor: Colors.blueAccent,
                     child: IconButton(
                       icon: const Icon(Icons.send, color: Colors.white),
                       onPressed: _handleSend,

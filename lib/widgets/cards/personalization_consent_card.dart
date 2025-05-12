@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:infogaurd_fe/widgets/forms/user_profile_form.dart';
 
-class PersonalizationConsentCard extends StatelessWidget {
+class PersonalizationConsentCard extends StatelessWidget { // 맞춤 정책 정보 수집 요청 카드
   final double? width;
 
   const PersonalizationConsentCard({
@@ -60,14 +60,14 @@ class PersonalizationConsentCard extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.black,
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                    primary: Colors.blueAccent,
+                    onPrimary: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: const Text(
-                    '네, 받을래요',
+                    '내 프로필 설정하기',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
