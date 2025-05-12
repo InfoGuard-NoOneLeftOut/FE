@@ -88,36 +88,44 @@ class _UserProfileFormState extends State<UserProfileForm> {
                   if (currentStep == 0)
                     OutlinedButton(
                       onPressed: () {
-                        // Navigator.pop 대신 MainScreen으로 이동
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const MainScreen(),
-                          ),
+                          MaterialPageRoute(builder: (context) => const MainScreen()),
                         );
                       },
-                      child: const Text("취소"),
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      ),
+                      child: const Text("취소", style: TextStyle(fontSize: 16)),
                     )
-                  else if (currentStep == 1)
+                  else if (currentStep == 1 || currentStep == 2)
                     OutlinedButton(
                       onPressed: () {
                         setState(() {
                           currentStep -= 1;
                         });
                       },
-                      child: const Text("이전"),
+                      style: OutlinedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      ),
+                      child: const Text("이전", style: TextStyle(fontSize: 16)),
                     ),
 
                   // 오른쪽 버튼: 다음 또는 완료
                   ElevatedButton(
                     onPressed: () {
-                      if (currentStep == 0) { // 1페이지 일 경우 다음 버튼 클릭 시 페이지 +1
+                      if (currentStep == 0) {
                         if (_formKey.currentState!.validate()) {
                           _formKey.currentState!.save();
                           setState(() => currentStep += 1);
                         }
                       } else if (currentStep == 1) {
-                        // 경계선일 경우 한 단계 더
                         if (_disabilityTypes.contains(DisabilityType.speech)) {
                           setState(() => currentStep += 1);
                         } else {
@@ -127,10 +135,22 @@ class _UserProfileFormState extends State<UserProfileForm> {
                         _submitForm();
                       }
                     },
-                    child: Text(currentStep < 2 ? "다음" : "완료"),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      onPrimary: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+                    ),
+                    child: Text(
+                      currentStep < 2 ? "다음" : "완료",
+                      style: const TextStyle(fontSize: 16),
+                    ),
                   ),
                 ],
               ),
+
             ],
           ),
         ),

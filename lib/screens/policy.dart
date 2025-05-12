@@ -6,6 +6,7 @@ import 'package:infogaurd_fe/widgets/lists/recommendation_policy_list.dart';
 import 'package:infogaurd_fe/widgets/lists/recommendation_job_list.dart';
 import 'package:infogaurd_fe/widgets/components/main_logo_header.dart';
 import 'package:infogaurd_fe/widgets/lists/personalized_policy_list.dart';
+import 'package:infogaurd_fe/widgets/cards/popular_policies_card.dart';
 
 class PolicyScreen extends StatefulWidget {
   const PolicyScreen({Key? key}) : super(key: key);
@@ -41,8 +42,34 @@ class _PolicyScreenState extends State<PolicyScreen> {
       final typeOk = _filterType == '전체' || j.type == _filterType;
       return locOk && typeOk;
     }).toList();
-    final popularPolicies = _allPolicies.take(4).toList();
     final recommendedCompanies = _allJobs.map((j) => j.company).toSet().take(4).toList();
+
+    final List<Policy> popularPolicies = [
+      Policy(
+        title: '장애인 연금 지원',
+        description: '득이 일정 기준 이하인 장애인에게 매월 연금을 지급합니다.',
+        imageUrl: '/assets/images/card1.png',
+        provider: '보건복지부',
+      ),
+      Policy(
+        title: '차상위 장애인 생계지원',
+        description: '차상위 계층 장애인에게 추가 현금 지원을 제공합니다.',
+        imageUrl: '/assets/images/card2.png',
+        provider: '보건복지부',
+      ),
+      Policy(
+        title: '장애학생 교육 바우처',
+        description: '장애학생의 학습 보조를 위해 교육비를 바우처 형태로 지원합니다.',
+        imageUrl: '/assets/images/card3.png',
+        provider: '교육부',
+      ),
+      Policy(
+        title: '장애인 평생교육 지원',
+        description: '성인 장애인을 위한 평생교육 프로그램 수강료를 지원합니다.',
+        imageUrl: '/assets/images/card4.png',
+        provider: '교육부',
+      ),
+    ];
 
     return DefaultTabController(
       length: 2,
@@ -87,40 +114,9 @@ class _PolicyScreenState extends State<PolicyScreen> {
                     setState(() => _selectedPolicyCategory = val);
                   },
                 ),
-
-                // 인기 정책
-                const SizedBox(height: 48),
-                const Text('이번 달 인기 정책', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-                const SizedBox(height: 8),
-                SizedBox(
-                  height: 140,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: popularPolicies.length,
-                    separatorBuilder: (_, __) => const SizedBox(width: 8),
-                    itemBuilder: (ctx, i) {
-                      final p = popularPolicies[i];
-                      return SizedBox(
-                        width: 200,
-                        child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                          elevation: 3,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(p.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                                const SizedBox(height: 8),
-                                Text(p.provider, style: const TextStyle(fontSize: 12, color: Colors.black54)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
+  
+                // 이번 달 인기 정책
+                PopularPoliciesCard(popularPolicies: popularPolicies),
               ],
             ),
 
@@ -177,3 +173,4 @@ class _PolicyScreenState extends State<PolicyScreen> {
     );
   }
 }
+
