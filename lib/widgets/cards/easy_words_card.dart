@@ -7,12 +7,14 @@ class WelfarePolicy {
   final String title;
   final String description;
   final String category;
+  final Icon icon;
 
   WelfarePolicy({
     required this.id,
     required this.title,
     required this.description,
     required this.category,
+    required this.icon,
   });
 }
 
@@ -133,11 +135,7 @@ class _EasyWordsCardState extends State<EasyWordsCard> {
 
           // 아이콘 또는 이미지
           Center(
-            child: Icon(
-              Icons.credit_card,
-              size: 40,
-              color: Colors.deepPurpleAccent,
-            ),
+            child: policy.icon,
           ),
           const SizedBox(height: 16),
 

@@ -17,7 +17,7 @@ class UserBasedCategoriesButton extends StatelessWidget {
       crossAxisSpacing: 12,
       mainAxisSpacing: 12,
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-      childAspectRatio: 0.85,
+      childAspectRatio: 1, // 정사각형 셀
       children: categories.map((category) {
         return GestureDetector(
           onTap: () {
@@ -25,11 +25,10 @@ class UserBasedCategoriesButton extends StatelessWidget {
           },
           child: Material(
             color: Colors.white,
-            elevation: 0.5,
+            elevation: 1,
             shadowColor: Colors.black.withOpacity(0.05),
             borderRadius: BorderRadius.circular(20),
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+            child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
@@ -41,12 +40,15 @@ class UserBasedCategoriesButton extends StatelessWidget {
                   ),
                 ],
               ),
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  category.icon,
-                  const SizedBox(height: 12),
+                  IconTheme(
+                    data: const IconThemeData(size: 40),
+                    child: category.icon,
+                  ),
+                  const SizedBox(height: 2),
                   Text(
                     category.title,
                     textAlign: TextAlign.center,
@@ -54,6 +56,8 @@ class UserBasedCategoriesButton extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),

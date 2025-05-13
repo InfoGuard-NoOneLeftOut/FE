@@ -68,17 +68,38 @@ class HomeScreen extends StatelessWidget { // 메인 페이지
 
                 EasyWordsCard( // 쉬운 용어 사전
                   policies: [
-                    WelfarePolicy(id: '1', title: '장애인 고용 지원', description: '고용 창출을 위한 다양한 혜택 제공', category: '일자리'),
-                    WelfarePolicy(id: '2', title: '장애인 교육 바우처', description: '교육비 일부 지원', category: '교육'),
-                    WelfarePolicy(id: '3', title: '이동 지원 서비스', description: '특별교통수단 제공', category: '이동'),
-                    WelfarePolicy(id: '4', title: '주거환경 개선', description: '보조금 및 개조 지원', category: '주거'),
-                    WelfarePolicy(id: '5', title: '의료비 지원', description: '의료비 일부 보조', category: '건강·의료'),
-                    WelfarePolicy(id: '6', title: '장애인 문화 활동', description: '문화 공연 할인 등 혜택', category: '문화·생활'),
-                    WelfarePolicy(id: '7', title: '돌봄 지원 서비스', description: '장애 아동 돌봄 제공', category: '돌봄'),
-                    WelfarePolicy(id: '8', title: '자립생활 지원', description: '독립적 생활 지원', category: '문화·생활'),
-                    WelfarePolicy(id: '9', title: '차량 개조 지원', description: '운전 보조 기기 설치 지원', category: '이동'),
+                    WelfarePolicy(
+                      id: '1',
+                      title: '장애인 고용 지원',
+                      description: '고용 창출을 위한 다양한 혜택 제공',
+                      category: '일자리',
+                      icon: const Icon(Icons.work, size: 40, color: Colors.blue),
+                    ),
+                    WelfarePolicy(
+                      id: '2',
+                      title: '장애인 교육 바우처',
+                      description: '교육비 일부 지원',
+                      category: '교육',
+                      icon: const Icon(Icons.school, size: 40, color: Colors.green),
+                    ),
+                    WelfarePolicy(
+                      id: '3',
+                      title: '이동 지원 서비스',
+                      description: '특별교통수단 제공',
+                      category: '교통',
+                      icon: const Icon(Icons.directions_bus, size: 40, color: Colors.orange),
+                    ),
+                    WelfarePolicy(
+                      id: '4',
+                      title: '주거환경 개선',
+                      description: '보조금 및 개조 지원',
+                      category: '주거',
+                      icon: const Icon(Icons.home_repair_service, size: 40, color: Colors.blue),
+                    ),
+                    // ...이하 생략
                   ],
-                )
+                ),
+
               ],
 
             )
@@ -91,22 +112,22 @@ class HomeScreen extends StatelessWidget { // 메인 페이지
 List<UserCategory> userCategories = [
   UserCategory(
     title: '중증',
-    icon: const Icon(Icons.local_hospital, color: Colors.orange, size: 32),
-    route: '/', // 해당 카테고리 선택 시 이동 경로
+    icon: const Icon(Icons.health_and_safety, color: Colors.blue),
+    route: '/',
   ),
   UserCategory(
     title: '경증',
-    icon: const Icon(Icons.local_hospital_outlined, color: Colors.blue, size: 32),
+    icon: const Icon(Icons.medical_services, color: Colors.blue),
     route: '/',
   ),
   UserCategory(
     title: '문화 지원',
-    icon: const Icon(Icons.movie_outlined, color: Colors.orange, size: 32),
+    icon: const Icon(Icons.theaters, color: Colors.blue),
     route: '/',
   ),
   UserCategory(
     title: '생활 지원',
-    icon: const Icon(Icons.real_estate_agent_outlined, color: Colors.blue, size: 32),
+    icon: const Icon(Icons.volunteer_activism, color: Colors.blue),
     route: '/',
   ),
 ];
